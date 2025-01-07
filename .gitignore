@@ -1,0 +1,23 @@
+# macOS system files
+.DS_Store
+
+# Environment variables
+.env
+
+# Virtual environment
+vaakya-env/
+
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+
+# Editor-specific files
+.vscode/
+.idea/
