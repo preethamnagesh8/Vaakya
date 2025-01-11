@@ -43,3 +43,39 @@ def post_generated_blog_to_wordpress(blog_id, global_blog_id):
     update_result = wordpress_tools.wordpress_update_blog_content(blog_id, blog_content)
     os.remove(blog_content_file)
     return update_result
+
+def generate_and_update_tags_for_wordpress_blog(blog_id, topic):
+    tags_content_template = """
+        Create 3 or 4 most relevant tags for a blog on the topic "{topic}". Generate a comma separated string. 
+    """
+
+    tags_content_prompt_template = PromptTemplate(
+        template=tags_content_template,
+        input_variables=["topic"]
+    )
+
+    llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
+    chain = tags_content_prompt_template | llm | StrOutputParser()
+    res = chain.invoke(input={"topic": topic})
+    tag_update_result = wordpress_tools.wordpress_update_blog_tags(blog_id, res)
+
+    return tag_update_result
+
+
+def generate_and_update_title_for_wordpress_blog(blog_id, topic):
+    title_template = """
+        Create a unique and engaging blog title for the topic: “{topic}”. 
+        The title should spark curiosity, avoid generic phrasing, and be concise (under 15 words).
+    """
+
+    title_prompt_template = PromptTemplate(
+        template=title_template,
+        input_variables=["topic"]
+    )
+
+    llm = ChatOpenAI(temperature=0, model="gpt-4o-mini")
+    chain = title_prompt_template | llm | StrOutputParser()
+    res = chain.invoke(input={"topic": topic})
+    title_update_result = wordpress_tools.wordpress_update_blog_title(blog_id, res)
+
+    return title_update_result

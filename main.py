@@ -18,6 +18,8 @@ def write_blog_for_topic(topic):
     global_blog_id = new_blog['global_ID']
     blog_handler.generate_blog_content_by_section_and_store(topic, global_blog_id)
     blog_handler.post_generated_blog_to_wordpress(blog_id, global_blog_id)
+    blog_handler.generate_and_update_tags_for_wordpress_blog(blog_id, topic)
+    blog_handler.generate_and_update_title_for_wordpress_blog(blog_id, topic)
 
 
 if __name__ == "__main__":
