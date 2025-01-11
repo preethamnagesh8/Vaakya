@@ -42,4 +42,4 @@ def post_generated_blog_to_wordpress(blog_id, global_blog_id):
         blog_content = blog_file.read()
     update_result = wordpress_tools.wordpress_update_blog_content(blog_id, blog_content)
     os.remove(blog_content_file)
-    return update_result.json()
+    return update_result
