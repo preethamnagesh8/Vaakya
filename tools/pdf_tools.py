@@ -26,7 +26,7 @@ def load_docs_into_document_loaders(path_to_pdf):
 
 def split_docs_into_chunks(docs):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,  # chunk size (characters)
+        chunk_size=5000,  # chunk size (characters)
         chunk_overlap=200,  # chunk overlap (characters)
         add_start_index=True,  # track index in original document
     )
