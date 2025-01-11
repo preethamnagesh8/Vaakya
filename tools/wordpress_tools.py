@@ -7,7 +7,8 @@ edit_blog_post_url = os.environ.get("WORDPRESS_EDIT_BLOG_URL")
 
 def wordpress_update_blog_content(blog_id, blog_content):
     data = {
-        "content": blog_content
+        "content": blog_content,
+        "categories": "OWASP Top 10"
     }
 
     headers = {
